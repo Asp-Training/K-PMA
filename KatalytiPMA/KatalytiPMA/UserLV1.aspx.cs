@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace KatalytiPMA
 {
-    public partial class UserLV1 : System.Web.UI.Page
+    public partial class UserLV : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
