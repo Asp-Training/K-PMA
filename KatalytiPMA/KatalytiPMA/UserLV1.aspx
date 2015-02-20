@@ -1,149 +1,117 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserLV1.aspx.cs" Inherits="KatalytiPMA.UserLV" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <a runat="server" href="~/AddUserLV" cssclass="">Add</a>
+    <a runat="server" href="~/AddUserLV" cssclass="">Add</a>
    <a runat="server" href="~/" cssclass="">Update</a>
    <a runat="server" href="~/DeleteUserLV" cssclass="">Delete</a>
-   <h2>List of Users</h2>
-    <asp:ListView ID="ListView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" InsertItemPosition="LastItem">
-
-        <AlternatingItemTemplate>
-
-            <tr style="">
-                <td>
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
-                </td>
-                <td>
-                    <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="roleLabel" runat="server" Text='<%# Eval("role") %>' />
-                </td>
-            </tr>
-        </AlternatingItemTemplate>
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+        <Columns>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+            <asp:BoundField DataField="user_id" HeaderText="user_id" SortExpression="user_id" />
+            <asp:BoundField DataField="name" HeaderText="name" SortExpression="name" />
+            <asp:BoundField DataField="email_id" HeaderText="email_id" SortExpression="email_id" />
+            <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
+            <asp:BoundField DataField="role" HeaderText="role" SortExpression="role" />
+            <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
+        </Columns>
+    </asp:GridView>
+    <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Insert">
         <EditItemTemplate>
-
-            <tr style="">
-                <td>
-                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
-                </td>
-                <td>
-                    <asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="roleTextBox" runat="server" Text='<%# Bind("role") %>' />
-                </td>
-            </tr>
+            Id:
+            <asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' />
+            <br />
+            user_id:
+            <asp:TextBox ID="user_idTextBox" runat="server" Text='<%# Bind("user_id") %>' />
+            <br />
+            name:
+            <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+            <br />
+            email_id:
+            <asp:TextBox ID="email_idTextBox" runat="server" Text='<%# Bind("email_id") %>' />
+            <br />
+            password:
+            <asp:TextBox ID="passwordTextBox" runat="server" Text='<%# Bind("password") %>' />
+            <br />
+            role:
+            <asp:TextBox ID="roleTextBox" runat="server" Text='<%# Bind("role") %>' />
+            <br />
+            active:
+            <asp:CheckBox ID="activeCheckBox" runat="server" Checked='<%# Bind("active") %>' />
+            <br />
+            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+            &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
         </EditItemTemplate>
-        <EmptyDataTemplate>
-            <table runat="server" style="">
-                <tr>
-                    <td>No data was returned.</td>
-                </tr>
-            </table>
-        </EmptyDataTemplate>
         <InsertItemTemplate>
-             
-            <tr style="">
-                <td>
-                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
-                </td>
-                <td>&nbsp;</td>
-                <td>
-                    <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="roleTextBox" runat="server" Text='<%# Bind("role") %>' />
-                </td>
-            </tr>
+            user_id:
+            <asp:TextBox ID="user_idTextBox" runat="server" Text='<%# Bind("user_id") %>' />
+            <br />
+            name:
+            <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+            <br />
+            email_id:
+            <asp:TextBox ID="email_idTextBox" runat="server" Text='<%# Bind("email_id") %>' />
+            <br />
+            password:
+            <asp:TextBox ID="passwordTextBox" runat="server" Text='<%# Bind("password") %>' />
+            <br />
+            role:
+            <asp:TextBox ID="roleTextBox" runat="server" Text='<%# Bind("role") %>' />
+            <br />
+            active:
+            <asp:CheckBox ID="activeCheckBox" runat="server" Checked='<%# Bind("active") %>' />
+            <br />
+            <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+            &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
         </InsertItemTemplate>
-
         <ItemTemplate>
+            Id:
+            <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
+            <br />
+            user_id:
+            <asp:Label ID="user_idLabel" runat="server" Text='<%# Bind("user_id") %>' />
+            <br />
+            name:
+            <asp:Label ID="nameLabel" runat="server" Text='<%# Bind("name") %>' />
+            <br />
 
-            <tr style="">
-                <td>
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
-                </td>
-                <td>
-                    <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="roleLabel" runat="server" Text='<%# Eval("role") %>' />
-                </td>
-            </tr>
+            email_id:
+            <asp:Label ID="email_idLabel" runat="server" Text='<%# Bind("email_id") %>' />
+            <br />
+            password:
+            <asp:Label ID="passwordLabel" runat="server" Text='<%# Bind("password") %>' />
+            <br />
+            role:
+            <asp:Label ID="roleLabel" runat="server" Text='<%# Bind("role") %>' />
+            <br />
+            active:
+            <asp:CheckBox ID="activeCheckBox" runat="server" Checked='<%# Bind("active") %>' Enabled="false" />
+            <br />
+            <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" />
+            &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" />
+            &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
         </ItemTemplate>
-        <LayoutTemplate>
-            <table runat="server">
-                <tr runat="server">
-                    <td runat="server">
-                        <table id="itemPlaceholderContainer" runat="server" border="0" style="">
-                            <tr runat="server" style="">
-                                <th runat="server"></th>
-                                <th runat="server">Id</th>
-                                <th runat="server">name</th>
-                                <th runat="server">role</th>
-                            </tr>
-                            <tr id="itemPlaceholder" runat="server">
-                            </tr>
-                            
-                        </table>
-                    </td>
-                </tr>
-                <tr runat="server">
-                    <td runat="server" style="">
-                    </td>
-                </tr>
-            </table>
-        </LayoutTemplate>
-        <SelectedItemTemplate>
-            <tr style="">
-                <td>
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
-                </td>
-                <td>
-                    <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="roleLabel" runat="server" Text='<%# Eval("role") %>' />
-                </td>
-            </tr>
-            
-
-        </SelectedItemTemplate>
-    </asp:ListView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Id], [name], [role] FROM [UserMgnt]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [UserMgnt] WHERE [Id] = @original_Id AND [name] = @original_name AND [role] = @original_role" InsertCommand="INSERT INTO [UserMgnt] ([name], [role]) VALUES (@name, @role)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [UserMgnt] SET [name] = @name, [role] = @role WHERE [Id] = @original_Id AND [name] = @original_name AND [role] = @original_role">
+    </asp:FormView>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [UserMgnt] WHERE [Id] = @Id" InsertCommand="INSERT INTO [UserMgnt] ([user_id], [name], [email_id], [password], [role], [active]) VALUES (@user_id, @name, @email_id, @password, @role, @active)" SelectCommand="SELECT * FROM [UserMgnt]" UpdateCommand="UPDATE [UserMgnt] SET [user_id] = @user_id, [name] = @name, [email_id] = @email_id, [password] = @password, [role] = @role, [active] = @active WHERE [Id] = @Id">
         <DeleteParameters>
-            <asp:Parameter Name="original_Id" Type="Int32" />
-            <asp:Parameter Name="original_name" Type="String" />
-            <asp:Parameter Name="original_role" Type="String" />
+            <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <InsertParameters>
+            <asp:Parameter Name="user_id" Type="Int32" />
             <asp:Parameter Name="name" Type="String" />
+            <asp:Parameter Name="email_id" Type="String" />
+            <asp:Parameter Name="password" Type="String" />
             <asp:Parameter Name="role" Type="String" />
+            <asp:Parameter Name="active" Type="Boolean" />
         </InsertParameters>
         <UpdateParameters>
+            <asp:Parameter Name="user_id" Type="Int32" />
             <asp:Parameter Name="name" Type="String" />
+            <asp:Parameter Name="email_id" Type="String" />
+            <asp:Parameter Name="password" Type="String" />
             <asp:Parameter Name="role" Type="String" />
-            <asp:Parameter Name="original_Id" Type="Int32" />
-            <asp:Parameter Name="original_name" Type="String" />
-            <asp:Parameter Name="original_role" Type="String" />
+            <asp:Parameter Name="active" Type="Boolean" />
+            <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    
+   <h2>List of Users</h2>
+        
 </asp:Content>
